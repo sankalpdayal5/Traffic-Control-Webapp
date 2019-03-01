@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/dashboard.css" />
+</head>
+
+<body>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="dashboard.html">Maps</a>
+        <a href="trafficInfo.html">Traffic Information</a>
+        <a href="statistics.html">Statistics</a>
+        <a href="#">Reports</a>
+        <a href="#">Contact us</a>
+    </div>
+
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Dashboard</span>
+
+
+
+
+
+
+    <div class="content-wrapper">
+        <div class="trafficpercent">
+            <h2>
+                Traffic Percentage
+            </h2>
+
+            <div class="container">
+                <div class="skills trafficbar">40%</div>
+            </div>
+
+            <div class="cylinders">
+
+                <div class="cylinder">
+                    <div class="water orange"></div>
+                    <label style="display:block;">Stage 1</label>
+                </div>
+                <label>Stage 1</label>
+                <div class="cylinder">
+                    <div class="water blue"></div>Stage 2
+                </div>
+                <label>Stage 2</label>
+                <div class="cylinder">
+                    <div class="water green"></div>Stage 3
+                </div>
+                <label>Stage 3</label>
+                <div class="cylinder">
+                    <div class="water red"></div>Stage 4
+                </div>
+                <label>Stage 4</label>
+                <br><br><br>
+
+            </div>
+
+        </div>
+
+        <div class="intersectinfo">
+            <h2>Intersection Information</h2>
+            <div class="intersectvalues">
+                <label>Junction Name : Gachinowli ORR Junction</label><br><br><br>
+                <label>Stage 1: Telecom Nagar</label><br><br>
+                <label>Stage 2: Kondapur</label><br><br>
+                <label>Stage 3: Indira Nagar</label><br><br>
+                <label>Stage 4: ORR</label><br><br><br>
+                <label>Pedestrian Time: 8 seconds</label>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "350px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
+
+</html>
