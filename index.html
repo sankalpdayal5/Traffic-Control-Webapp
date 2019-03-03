@@ -1,78 +1,137 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>RHPD</title>
+    <!-- BOOTSTRAP CORE STYLE  -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME STYLE  -->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE  -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- GOOGLE FONT -->
+    <link
+      href="http://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <title>Online Library Management System | </title>
-  <!-- BOOTSTRAP CORE STYLE  -->
-  <link href="assets/css/bootstrap.css" rel="stylesheet" />
-  <!-- FONT AWESOME STYLE  -->
-  <link href="assets/css/font-awesome.css" rel="stylesheet" />
-  <!-- CUSTOM STYLE  -->
-  <link href="assets/css/style.css" rel="stylesheet" />
-  <!-- GOOGLE FONT -->
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-
-</head>
-
-<body>
-  <!------MENU SECTION START-->
-  <!-- <?php include('includes/header.php');?> -->
-  <!-- MENU SECTION END-->
-  <div class="content-wrapper">
-    <div class="container">
-      <div class="row pad-botm">
-        <div class="col-md-12">
-          <h4 class="header-line">USER LOGIN FORM</h4>
+  <body>
+    <!------MENU SECTION START-->
+    <!-- <?php include('includes/header.php');?> -->
+    <!-- MENU SECTION END-->
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="row pad-botm">
+          <div class="col-md-12">
+            <h4 class="header-line">USER LOGIN FORM</h4>
+          </div>
         </div>
-      </div>
 
-      <!--LOGIN PANEL START-->
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              LOGIN FORM
-            </div>
-            <div class="panel-body">
-              <form role="form" method="post">
+        <script>
+          const userAction = async () => {
+            try {
+              var data = {
+                email: document.getElementsByName("emailid")[0].value,
+                password: document.getElementsByName("password")[0].value
+              };
+              console.log("fetching");
+              const response = await fetch(
+                "http://localhost:3000/users/login",
+                {
+                  method: "POST",
+                  body: JSON.stringify(data), // string or object
+                  headers: {
+                    "Content-Type": "application/json"
+                  }
+                }
+              );
+              if (response.status !== 401) {
+                console.log("fetched");
+                const myJson = await response.json(); //extract JSON from the http response
+                if (myJson.token) {
+                  console.log("logged in");
+                }
+                // console.log(myJson);
+              }else if(response.status===401){
+                console.log("wrong login credentials");
+              }
+            } catch (e) {
+              console.log("====================================");
+              console.log(e);
+              console.log("====================================");
+            }
+            // do something with myJson
+          };
+        </script>
+        <!--LOGIN PANEL START-->
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                LOGIN FORM
+              </div>
+              <div class="panel-body">
+                <form
+                  role="form"
+                  method="post"
+                  action="javascript:userAction()"
+                >
+                  <div class="form-group">
+                    <label>Enter Email id</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="emailid"
+                      required
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input
+                      class="form-control"
+                      type="password"
+                      name="password"
+                      required
+                      autocomplete="off"
+                    />
+                    <p class="help-block">
+                      <a href="user-forgot-password.php">Forgot Password</a>
+                    </p>
+                  </div>
 
-                <div class="form-group">
-                  <label>Enter Email id</label>
-                  <input class="form-control" type="text" name="emailid" required autocomplete="off" />
-                </div>
-                <div class="form-group">
-                  <label>Password</label>
-                  <input class="form-control" type="password" name="password" required autocomplete="off" />
-                  <p class="help-block"><a href="user-forgot-password.php">Forgot Password</a></p>
-                </div>
-
-
-                <button type="submit" name="login" class="btn btn-info">LOGIN </button> | <a href="signup.html">Not
-                  Register Yet</a><br><a href="adminlogin.html">Admin Login</a>
-                  <br><br> <a href="dashboard.html">Maps</a>
-              </form>
+                  <button type="submit" name="login" class="btn btn-info">
+                    LOGIN
+                  </button>
+                  | <a href="signup.html">Not Register Yet</a><br /><a
+                    href="adminlogin.html"
+                    >Admin Login</a
+                  >
+                  <br /><br />
+                  <a href="dashboard.html">Maps</a>
+                </form>
+              </div>
             </div>
           </div>
         </div>
+        <!---LOGIN PABNEL END-->
       </div>
-      <!---LOGIN PABNEL END-->
-
-
     </div>
-  </div>
-  <!-- CONTENT-WRAPPER SECTION END-->
-  <!-- <?php include('includes/footer.php');?> -->
-  <!-- FOOTER SECTION END-->
-  <script src="assets/js/jquery-1.10.2.js"></script>
-  <!-- BOOTSTRAP SCRIPTS  -->
-  <script src="assets/js/bootstrap.js"></script>
-  <!-- CUSTOM SCRIPTS  -->
-  <script src="assets/js/custom.js"></script>
-
-</body>
-
+    <!-- CONTENT-WRAPPER SECTION END-->
+    <!-- <?php include('includes/footer.php');?> -->
+    <!-- FOOTER SECTION END-->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="assets/js/bootstrap.js"></script>
+    <!-- CUSTOM SCRIPTS  -->
+    <script src="assets/js/custom.js"></script>
+  </body>
 </html>
