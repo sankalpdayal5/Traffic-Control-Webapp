@@ -11,7 +11,38 @@
 </head>
 
 <body>
-
+    <script>
+        function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+        const ApiCall = async() => {
+            const response = await fetch(
+                "http://localhost:3000/getLocations",
+                {
+                    method: "GET",
+                    // body: JSON.stringify(data), // string or object
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-auth": getCookie("jwtToken")
+                    }
+                }
+            );
+            const myJson = await response.json();
+            console.log(myJson);
+        }
+        ApiCall();
+    </script>
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="dashboard.html">Maps</a>

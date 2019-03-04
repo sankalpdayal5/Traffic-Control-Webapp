@@ -27,6 +27,7 @@
     <!------MENU SECTION START-->
     <!-- <?php include('includes/header.php');?> -->
     <!-- MENU SECTION END-->
+    
     <div class="content-wrapper">
       <div class="container">
         <div class="row pad-botm">
@@ -36,6 +37,7 @@
         </div>
 
         <script>
+
           const userAction = async () => {
             try {
               var data = {
@@ -44,7 +46,7 @@
               };
               console.log("fetching");
               const response = await fetch(
-                "https://rhdpnodeapi.herokuapp.com/users/login",
+                "http://localhost:3000/users/login",
                 {
                   method: "POST",
                   body: JSON.stringify(data), // string or object
@@ -54,13 +56,20 @@
                 }
               );
               if (response.status !== 401) {
-                console.log("fetched");
+                var variable;
+                for (var pair of response.headers.entries()) {
+                  console.log(pair[0] + ': ' + pair[1]);
+                  if(pair[0] === 'x-auth'){
+                    variable = pair[1];
+                  }
+                }
                 const myJson = await response.json(); //extract JSON from the http response
-                if (myJson.token) {
-                  console.log("logged in");
+                if (variable) {
+                  document.cookie = "jwtToken="+variable;
+                  window.location = "dashboard.html";
                 }
                 // console.log(myJson);
-              }else if(response.status===401){
+              } else if (response.status === 401) {
                 console.log("wrong login credentials");
               }
             } catch (e) {
